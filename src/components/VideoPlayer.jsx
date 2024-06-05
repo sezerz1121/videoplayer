@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import VideoControls from './VideoControls';
 
@@ -33,11 +33,30 @@ const VideoPlayer = () => {
     import.meta.env.VITE_VIDEO_10,
     import.meta.env.VITE_VIDEO_11,
     import.meta.env.VITE_VIDEO_12,
+  ];
 
+  const titles = [
+    'Encounter',
+    'Raising money',
+    'Raising money',
+    'Graduation',
+    'Crystal',
+    'Trials',
+    'Magic',
+    'New home',
+    'Bath',
+    'Melancholy',
+    'Order',
+    'Humans'
   ];
 
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const videoRef = useRef(null);
+  const [title, setTitle] = useState(titles[0]);
+
+  useEffect(() => {
+    setTitle(titles[currentVideoIndex]);
+  }, [currentVideoIndex]);
 
   let lastTap = 0;
 
@@ -73,10 +92,8 @@ const VideoPlayer = () => {
   };
 
   return (
-    <>
-    
     <PlayerWrapper>
-    <h6>ep{currentVideoIndex+1}</h6>
+      <h6>ep{currentVideoIndex + 1} {title}</h6>
       <Video
         ref={videoRef}
         src={videoUrls[currentVideoIndex]}
@@ -90,7 +107,6 @@ const VideoPlayer = () => {
       />
       <VideoControls onNext={handleNext} onPrevious={handlePrevious} />
     </PlayerWrapper>
-    </>
   );
 };
 
