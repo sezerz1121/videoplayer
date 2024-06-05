@@ -58,20 +58,33 @@ const VideoPlayer = () => {
     setTitle(titles[currentVideoIndex]);
   }, [currentVideoIndex]);
 
+  useEffect(() => {
+    const handleTouchStart = (e) => {
+      const currentTime = new Date().getTime();
+      const tapLength = currentTime - lastTap;
+      if (tapLength < 300 && tapLength > 0) {
+        e.preventDefault();
+        handleDoubleClick('forward');
+      }
+      lastTap = currentTime;
+    };
+
+    const videoElement = videoRef.current;
+    videoElement.addEventListener('touchstart', handleTouchStart);
+
+    return () => {
+      videoElement.removeEventListener('touchstart', handleTouchStart);
+    };
+  }, []);
+
   let lastTap = 0;
 
   const handleDoubleClick = (direction) => {
-    const currentTime = new Date().getTime();
-    const tapLength = currentTime - lastTap;
-
-    if (tapLength < 300 && tapLength > 0) {
-      if (direction === 'forward') {
-        videoRef.current.currentTime += 10;
-      } else {
-        videoRef.current.currentTime -= 10;
-      }
+    if (direction === 'forward') {
+      videoRef.current.currentTime += 10;
+    } else {
+      videoRef.current.currentTime -= 10;
     }
-    lastTap = currentTime;
   };
 
   const handleSwipe = (e) => {
@@ -98,7 +111,7 @@ const VideoPlayer = () => {
         ref={videoRef}
         src={videoUrls[currentVideoIndex]}
         controls
-        onTouchStart={() => handleDoubleClick('forward')}
+        onDoubleClick={() => handleDoubleClick('forward')}
         onContextMenu={(e) => {
           e.preventDefault();
           handleDoubleClick('backward');
@@ -111,3 +124,6 @@ const VideoPlayer = () => {
 };
 
 export default VideoPlayer;
+
+
+
