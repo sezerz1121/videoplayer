@@ -34,6 +34,7 @@ const VideoPlayer = () => {
     import.meta.env.VITE_VIDEO_11,
     import.meta.env.VITE_VIDEO_12,
     import.meta.env.VITE_VIDEO_13,
+    import.meta.env.VITE_VIDEO_14,
   ];
 
   const titles = [
@@ -49,7 +50,9 @@ const VideoPlayer = () => {
     'Melancholy',
     'Order',
     'Humans',
-    'Special'
+    'Special',
+    'sophiee'
+    
   ];
 
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
