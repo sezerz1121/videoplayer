@@ -33,12 +33,13 @@ const VideoPlayer = () => {
     import.meta.env.VITE_VIDEO_10,
     import.meta.env.VITE_VIDEO_11,
     import.meta.env.VITE_VIDEO_12,
+    import.meta.env.VITE_VIDEO_13,
   ];
 
   const titles = [
     'Encounter',
     'Raising money',
-    'Raising money',
+    'Aquire',
     'Graduation',
     'Crystal',
     'Trials',
@@ -47,7 +48,8 @@ const VideoPlayer = () => {
     'Bath',
     'Melancholy',
     'Order',
-    'Humans'
+    'Humans',
+    'Special'
   ];
 
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
